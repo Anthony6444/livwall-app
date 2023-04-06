@@ -100,7 +100,7 @@ class MyAppState extends ChangeNotifier {
       "checkouts": [
         CheckoutBook(
             dclID: 0,
-            title: "Title",
+            title: "Title VERY VERY LONG AND I DOTN KN WW FWO F PSDFOWPE FOPOM",
             author: "author",
             imgURL: "https://via.placeholder.com/300/defe32",
             renewCount: 0,
@@ -111,7 +111,7 @@ class MyAppState extends ChangeNotifier {
             author: "author",
             imgURL: "https://via.placeholder.com/300/defe32",
             renewCount: 0,
-            dueDate: DateTime.now())
+            dueDate: DateTime(2033))
       ],
       "holds": [
         HoldBook(
@@ -120,7 +120,7 @@ class MyAppState extends ChangeNotifier {
             author: "author",
             imgURL: "https://via.placeholder.com/300/ffee00",
             available: true,
-            pickupDate: DateTime.now()),
+            pickupDate: DateTime(2033)),
         HoldBook(
             dclID: 1,
             title: "title",
@@ -307,60 +307,66 @@ class PageLadderCard extends StatelessWidget {
                       itemCount: thisCardCheckouts.length,
                       itemBuilder: (BuildContext ctx, index) {
                         return Card(
-                          child: Row(
-                            children: [
-                              Image.network(
-                                thisCardCheckouts[index].imgURL,
-                                fit: BoxFit.fill,
-                                height: 150,
-                                width: 100,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
+                          child: Expanded(
+                            child: Row(
+                              children: [
+                                Image.network(
+                                  thisCardCheckouts[index].imgURL,
+                                  fit: BoxFit.fill,
+                                  height: 150,
+                                  width: 100,
                                 ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      thisCardCheckouts[index].title,
-                                      style: const TextStyle(
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        thisCardCheckouts[index].title,
+                                        style: const TextStyle(
                                           fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(thisCardCheckouts[index].author),
-                                    Text(
-                                        "Item Barcode: ${thisCardCheckouts[index].dclID}")
-                                  ],
-                                ),
-                              ),
-                              const Spacer(),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: appState.getOverdue(
-                                        thisCardCheckouts, index)
-                                    ? Icon(
-                                        Icons.error_outline,
-                                        color: Colors.red.shade400,
-                                      )
-                                    : Icon(
-                                        Icons.check_circle_outline,
-                                        color: Colors.green.shade400,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(DateFormat("yMMMMd").format(
-                                        thisCardCheckouts[index].dueDate))
-                                  ],
+                                      Text(thisCardCheckouts[index].author),
+                                      Text(
+                                          "Item Barcode: ${thisCardCheckouts[index].dclID}")
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                                const Spacer(),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: appState.getOverdue(
+                                          thisCardCheckouts, index)
+                                      ? Icon(
+                                          Icons.error_outline,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .error,
+                                        )
+                                      : Icon(
+                                          Icons.check_circle_outline,
+                                          color: Colors.green.shade400,
+                                        ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(DateFormat("yMMMMd").format(
+                                          thisCardCheckouts[index].dueDate))
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },
